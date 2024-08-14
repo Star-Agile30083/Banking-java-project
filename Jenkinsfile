@@ -3,27 +3,27 @@ pipeline{
     stages{
         stage('checkout the code from github'){
             steps{
-                 git url: 'https://github.com/akshu20791/Banking-java-project/'
+                 git url: 'https://github.com/Star-Agile30083/Banking-java-project.git/'
                  echo 'github url checkout'
             }
         }
-        stage('codecompile with akshat'){
+        stage('codecompile with sandhya'){
             steps{
                 echo 'starting compiling'
                 sh 'mvn compile'
             }
         }
-        stage('codetesting with akshat'){
+        stage('codetesting with sandhya'){
             steps{
                 sh 'mvn test'
             }
         }
-        stage('qa with akshat'){
+        stage('qa with sandhya'){
             steps{
                 sh 'mvn checkstyle:checkstyle'
             }
         }
-        stage('package with akshat'){
+        stage('package with sandhya'){
             steps{
                 sh 'mvn package'
             }
