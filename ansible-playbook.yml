@@ -14,5 +14,3 @@
 
     name: Deploy Desktop Container
     command: docker run -itd -p 8084:8081 sandydocker343/banking-project:1
-
-
