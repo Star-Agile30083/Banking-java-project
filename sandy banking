@@ -1,0 +1,49 @@
+pipeline{
+    agent any
+    stages{
+        stage('checkout the code from github'){
+            steps{
+                 git url: 'https://github.com/Star-Agile30083/Banking-java-project.git/'
+                 echo 'github url checkout'
+            }
+        }
+        stage('codecompile with sandhya'){
+            steps{
+                echo 'starting compiling'
+                sh 'mvn compile'
+            }
+        }
+        stage('codetesting with sandhya'){
+            steps{
+                sh 'mvn test'
+            }
+        }
+        stage('qa with sandhya'){
+            steps{
+                sh 'mvn checkstyle:checkstyle'
+            }
+        }
+        stage('package with sandhya'){
+            steps{
+                sh 'mvn package'
+            }
+        }
+        stage('run dockerfile'){
+          steps{
+               sh 'docker build -t sandydocker343/sandy-project .'
+           }
+         }
+        stage('Login to docker hub and push the file'){
+            steps{
+                withCredentials([string(credentialsId: 'sandysandhya', variable: 'sandydocker')]) {
+                    sh 'docker login -u sandydocker343 -p ${sandydocker}'
+                    sh ' docker  push sandydocker/sandy project '
+                }
+            }
+        }
+      //stage('push to docker hub '){
+        //steps{
+           //  sh 'docker build -t sandydocker343/sandy-project .'
+          //}
+        //}
+}
